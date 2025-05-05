@@ -36,6 +36,8 @@ Determine your Operating system and architecture [here](./docs/Detect-OS-Arch.md
 ### 📖 Installation Instructions
 
 > Side Note - Ensure Docker is installed and running on your system before executing the commands. For complete docker installation guide, please visit https://docs.docker.com/engine/install/
+> 
+> MicroAI Launchpad Account is required to view dashboards. Please access this [guide](Launchpad-Setup.md) page to setup account.
 ##### For Debian/Ubuntu-based images
 
 > 1. Installs dependencies needed to download, extract, and run MicroAI Application Monitoring Agent
@@ -111,13 +113,13 @@ MICROAI_AM_EMAIL_USERNAME=
 MICROAI_AM_EMAIL_PASSWORD=
 MICROAI_AM_EMAIL_FROM=
 MICROAI_AM_EMAIL_TO=
-MICROAI_AM_EMAIL_TRANSACTION_BASE_URL=
+MICROAI_AM_EMAIL_TRANSACTION_BASE_URL=https://cloud1-icedata.micro.ai
 MICROAI_AM_EMAIL_ICONS_BASE_URL=https://micro.ai
 MICROAI_AM_MQTT_HOST=
 MICROAI_AM_MQTT_PORT=
 MICROAI_AM_MQTT_USERNAME=
 MICROAI_AM_MQTT_PASSWORD=
-MICROAI_AM_FEED_INFO_BASE_URL=
+MICROAI_AM_FEED_INFO_BASE_URL=https://cloud1-api.micro.ai
 
 ```
 
@@ -276,7 +278,7 @@ If all checks pass, the agent is successfully configured and operational!
 
 To customize your agent settings, refer to the [Configurations Guide](docs/Configurations.md).
 
-If you wish to view your profile, devices or update your plan, follow this [guide](./docs/Update-Profile.md).
+If you wish to view your manage profile, or view dashboards follow this [guide](Launchpad.md).
 
 ## Features
 
