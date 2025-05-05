@@ -24,26 +24,4 @@ Click on **Asset Profiles** to view your current profile and plan details. Click
 
 <img src="./images/Profile-Page.png" width="600" alt="Asset Profile Overview">
 
-#### Step 3.1: View and Update Device Details
 
-The **Step 1** view displays device details, which can be updated.
-
-<img src="./images/Profile-Edit-1.png" width="600" alt="Device Details View">
-
-#### Step 3.2: Update Configuration File
-
-The **Step 2** view provides an interface to update the configuration file, which can be downloaded to modify agent settings.
-
-<img src="./images/Profile-Edit-2.png" width="600" alt="Configuration File Update View">
-
-#### Step 3.3: View and Modify Plan Details
-
-The **Step 3** view displays your current plan details and provides options to update the plan.
-
-<img src="./images/Profile-Edit-3.png" width="600" alt="Plan Details View">
-
-#### Step 3.4: Add Payment Method
-
-The **Step 4** view allows you to add a payment method. Once complete, click **Finish** to update your profile and plan settings.
-
-<img src="./images/Profile-Edit-4.png" width="600" alt="Payment Method Addition View">

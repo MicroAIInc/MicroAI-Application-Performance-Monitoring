@@ -21,6 +21,8 @@
 
 - [Installation](#installation)
 - [Validation](#Validation)
+- [Configurations](#configurations)
+- [Features](#features)
 - [Troubleshooting](#troubleshooting)
 - [License](#license)
 - [Contact](#contact) 
@@ -93,28 +95,9 @@ ENTRYPOINT ["/bin/bash", "-c", "./MicroAI_AM_agent/bin/main & /start.sh <applica
 ```
 
 
-##### Environment File
+##### **Environment File**
 
-- <ins>MICROAI_AM_ENABLE_AGENT</ins> - (Boolean value) Enables/Disables agent. Default behavior is disable if value not set
-- <ins>MICROAI_AM_ENVIRONMENT</ins> - (String value) Environment of the application where it is running
-- <ins>MICROAI_AM_PROFILE_KEY</ins> - (String value) MicroAI Launchpad profile key
-- <ins>MICROAI_AM_TRAINING_ROWS</ins> - (Integer value) Number of call/transaction per API to use for training
-- <ins>MICROAI_AM_IS_BUILD_MODEL</ins> - (Boolean value)Use existing model if exists if value is set as true otherwise it will override the model with new training dataset. Best to set false in containerized environment.
-- <ins>MICROAI_AM_OBSERVATION_WINDOW_MINUTES</ins> - (Integer value) Sliding Window duration to take in count when alerting on performance
-- <ins>MICROAI_AM_EMAIL_HOST</ins> - (String value) Email host value used for sending email alerts
-- <ins>MICROAI_AM_EMAIL_PORT</ins> - (String value) Email port value used for sending email alerts
-- <ins>MICROAI_AM_EMAIL_USERNAME</ins> - (String value) Email username value used for sending email alerts
-- <ins>MICROAI_AM_EMAIL_PASSWORD</ins> - (String value) Email password value used for sending email alerts
-- <ins>MICROAI_AM_EMAIL_FROM</ins> - (String value) Sender Email used for sending email alerts
-- <ins>MICROAI_AM_EMAIL_TO</ins> - (String - Support comma separated) Receiver's Email used for sending email alerts
-- <ins>MICROAI_AM_EMAIL_TRANSACTION_BASE_URL</ins> - Used for Internal Launchpad - (String value) Use for linking email links to Launchpad
-- <ins>MICROAI_AM_EMAIL_ICONS_BASE_URL</ins> - Used for Internal Launchpad - (String value) - Use for displaying icons in email alert
-- <ins>MICROAI_AM_MQTT_HOST</ins> - Used for Internal Launchpad - (String value) - Use for sending data to Launchpad for Dashboard and Alerts
-- <ins>MICROAI_AM_MQTT_PORT</ins> - Used for Internal Launchpad - (String value) - Use for sending data to Launchpad for Dashboard and Alerts
-- <ins>MICROAI_AM_MQTT_USERNAME</ins> - Used for Internal Launchpad - (String value) - Use for sending data to Launchpad for Dashboard and Alerts
-- <ins>MICROAI_AM_MQTT_PASSWORD</ins> - Used for Internal Launchpad - (String value) - Use for sending data to Launchpad for Dashboard and Alerts
-- <ins>MICROAI_AM_FEED_INFO_BASE_URL</ins> - Used for Internal Launchpad - (String value) - Use for activating Agent with Launchpad
- 
+
 ```
 MICROAI_AM_ENABLE_AGENT=true
 MICROAI_AM_ENVIRONMENT=TestEnvironment
@@ -241,13 +224,13 @@ MICROAI_AM_EMAIL_USERNAME=
 MICROAI_AM_EMAIL_PASSWORD=
 MICROAI_AM_EMAIL_FROM=
 MICROAI_AM_EMAIL_TO=
-MICROAI_AM_EMAIL_TRANSACTION_BASE_URL=
+MICROAI_AM_EMAIL_TRANSACTION_BASE_URL=https://cloud1-icedata.micro.ai
 MICROAI_AM_EMAIL_ICONS_BASE_URL=https://micro.ai
 MICROAI_AM_MQTT_HOST=
 MICROAI_AM_MQTT_PORT=
 MICROAI_AM_MQTT_USERNAME=
 MICROAI_AM_MQTT_PASSWORD=
-MICROAI_AM_FEED_INFO_BASE_URL=
+MICROAI_AM_FEED_INFO_BASE_URL=https://cloud1-api.micro.ai
 ```
 
 ---
@@ -289,6 +272,15 @@ After starting container, use the following steps to ensure the agent is running
 If all checks pass, the agent is successfully configured and operational!
 
 
+## Configurations
+
+To customize your agent settings, refer to the [Configurations Guide](docs/Configurations.md).
+
+If you wish to view your profile, devices or update your plan, follow this [guide](./docs/Update-Profile.md).
+
+## Features
+
+Take a peek at our [feature page](docs/Feature-List.md) for current features available with our agent.
 
 ## Troubleshooting
 
