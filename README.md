@@ -31,7 +31,7 @@
 
 Follow the steps below to install MicroAI Application Monitoring on your system. The installation process varies depending on your operating system and architecture. 
 
-Determine your Operating system and architecture [here](./docs/Detect-OS-Arch.md).
+Determine your Operating system and architecture [here](docs/Detect_OS_Arch.md).
 
 ### 📖 Installation Instructions
 
@@ -278,7 +278,7 @@ If all checks pass, the agent is successfully configured and operational!
 
 To customize your agent settings, refer to the [Configurations Guide](docs/Configurations.md).
 
-If you wish to view your manage profile, or view dashboards follow this [guide](Launchpad.md).
+If you wish to view your manage profile, or view dashboards follow this [guide](docs/Launchpad.md).
 
 ## Features
 
