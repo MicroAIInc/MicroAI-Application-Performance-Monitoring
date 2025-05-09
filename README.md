@@ -37,7 +37,7 @@ Determine your Operating system and architecture [here](docs/Detect_OS_Arch.md).
 
 > Side Note - Ensure Docker is installed and running on your system before executing the commands. For complete docker installation guide, please visit https://docs.docker.com/engine/install/
 > 
-> MicroAI Launchpad Account is required to view dashboards. Please access this [guide](Launchpad-Setup.md) page to setup account.
+> MicroAI Launchpad Account is required to view dashboards. Please access this [guide](docs/Launchpad_Setup.md) page to setup account.
 ##### For Debian/Ubuntu-based images
 
 > 1. Installs dependencies needed to download, extract, and run MicroAI Application Monitoring Agent
