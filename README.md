@@ -309,7 +309,7 @@ For further assistance, contact [**support@micro.ai**](mailto\:support@micro.ai)
 
 ---
 
-## License
+### License
 
 See [Software Licensing Agreement](License.txt) for more details.
 
