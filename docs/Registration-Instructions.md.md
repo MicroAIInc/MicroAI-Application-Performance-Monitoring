@@ -1,0 +1,53 @@
+# Registration & License Key Retrieval Guide
+
+Follow these steps to register and retrieve your license key for activation.
+
+---
+
+## **Step 1: Access the Registration Page**
+Visit the registration page at <a href="https://launchpad.micro.ai/activate/apmtrial" target="_blank">MicroAI Launchpad</a> and enter the following details:
+- **First Name**
+- **Last Name**
+- **Company Name**
+- **Email Address**
+- **Phone Number**
+
+<img src="./images/Activate-License.png" alt="Registration Form" width="600">
+
+Click **Activate** to proceed.
+
+---
+
+## **Step 2: Choose OTP Delivery Method**
+On the next page, select how you would like to receive your **One-Time Password (OTP):**
+- **Email**
+- **SMS**
+
+<img src="./images/Activate-License-OTP.png" alt="OTP Selection" width="600">
+
+Click **Request OTP** after selecting your preferred option.
+
+---
+
+## **Step 3: Enter Your OTP**
+You will receive a **One-Time Password (OTP)** via your chosen method. Enter it in the field provided and click **Submit**.
+
+<img src="./images/Activate-License-OTP-Verification.png" alt="OTP Entry" width="600">
+
+If you did not receive the OTP, click **Resend OTP**.
+
+---
+
+## **Step 4: Retrieve Your License Key**
+After successful verification, your **license key** will be displayed on the final page. This key will also be sent to your registered email.
+
+<img src="./images/Activate-License-License-Key.png" alt="License Key Display" width="600">
+
+Use this key to activate your software.
+
+---
+
+
+🔄 **Keep this license key safe!** You will need it for activation.
+
+🚀 Happy using our software!

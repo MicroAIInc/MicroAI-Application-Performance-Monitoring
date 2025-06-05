@@ -29,7 +29,7 @@
 
 ## Installation
 
-Follow the steps below to install MicroAI Application Monitoring on your system. The installation process varies depending on your operating system and architecture. 
+Follow these steps below to install MicroAI Application Monitoring on your system. The installation process varies depending on your operating system and architecture. 
 
 Determine your Operating system and architecture [here](docs/Detect_OS_Arch.md).
 
@@ -38,6 +38,8 @@ Determine your Operating system and architecture [here](docs/Detect_OS_Arch.md).
 > Side Note - Ensure Docker is installed and running on your system before executing the commands. For complete docker installation guide, please visit https://docs.docker.com/engine/install/
 > 
 > MicroAI Launchpad Account is required to view dashboards. Please access this [guide](docs/Launchpad_Setup.md) page to setup account.
+
+### Step 1: Set Up the Agent
 ##### For Debian/Ubuntu-based images
 
 > 1. Installs dependencies needed to download, extract, and run MicroAI Application Monitoring Agent
@@ -237,6 +239,10 @@ MICROAI_AM_FEED_INFO_BASE_URL=https://cloud1-api.micro.ai
 
 ---
 
+
+### Step 2: Activate your License
+
+Activate your license and retrieve your license key on [MicroAI Launchpad](https://launchpad.micro.ai/activate/apmtrial). See [activation walkthrough](docs/Registration-Instructions.md) for guided steps.
 
 ## Validation
 
