@@ -242,7 +242,7 @@ MICROAI_AM_FEED_INFO_BASE_URL=https://cloud1-api.micro.ai
 
 ### Step 2: Activate your License
 
-Activate your license and retrieve your license key on [MicroAI Launchpad](https://launchpad.micro.ai/activate/apmtrial). See [activation walkthrough](Registration-Instructions.md) for guided steps.
+Activate your license and retrieve your license key on [MicroAI Launchpad](https://launchpad.micro.ai/activate/apmtrial). See [activation walkthrough](docs/Registration-Instructions.md) for guided steps.
 
 ## Validation
 
