@@ -37,7 +37,7 @@ Determine your Operating system and architecture [here](docs/Detect_OS_Arch.md).
 
 > Side Note - Ensure Docker is installed and running on your system before executing the commands. For complete docker installation guide, please visit https://docs.docker.com/engine/install/
 > 
-> MicroAI Launchpad Account is required to view dashboards. Please access this [guide](docs/Launchpad_Setup.md) page to setup account.
+> MicroAI License is required to run this agent. Get a trial license [here](docs/Registration-Instructions.md) or Please access this [guide](docs/Launchpad_Setup.md) page to setup account.
 
 ### Step 1: Set Up the Agent
 ##### For Debian/Ubuntu-based images
@@ -123,6 +123,7 @@ MICROAI_AM_MQTT_USERNAME=
 MICROAI_AM_MQTT_PASSWORD=
 MICROAI_AM_FEED_INFO_BASE_URL=https://cloud1-api.micro.ai
 MICROAI_AM_ALERT_MODIFIER=0.5
+MICROAI_AM_EMAIL_ALERT_LEVELS=critical,high,medium,low,info
 
 ```
 
@@ -236,6 +237,9 @@ MICROAI_AM_MQTT_PORT=
 MICROAI_AM_MQTT_USERNAME=
 MICROAI_AM_MQTT_PASSWORD=
 MICROAI_AM_FEED_INFO_BASE_URL=https://cloud1-api.micro.ai
+MICROAI_AM_ALERT_MODIFIER=0.5
+MICROAI_AM_EMAIL_ALERT_LEVELS=critical,high,medium,low,info
+
 ```
 
 ---
