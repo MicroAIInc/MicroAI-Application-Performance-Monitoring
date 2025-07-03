@@ -31,7 +31,7 @@
 
 Follow these steps below to install MicroAI Application Monitoring on your system. The installation process varies depending on your operating system and architecture. 
 
-Determine your Operating system and architecture [here](docs/Detect_OS_Arch.md).
+Determine your Operating system and architecture [here](docs/Detect_OS_Arch.md) and Packages are available [here](docs/Packages.md)
 
 ### 📖 Installation Instructions
 
