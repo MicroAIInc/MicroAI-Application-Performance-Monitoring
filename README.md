@@ -37,7 +37,7 @@ Determine your Operating system and architecture [here](docs/Detect_OS_Arch.md) 
 
 > Side Note - Ensure Docker is installed and running on your system before executing the commands. For complete docker installation guide, please visit https://docs.docker.com/engine/install/
 > 
-> MicroAI License is required to run this agent. Get a trial license [here](docs/Registration-Instructions.md) or Please access this [guide](docs/Launchpad_Setup.md) page to setup account.
+> MicroAI License is required to run this agent. Get a trial license [here](docs/Registration-Instructions.md) or Please access this [guide](docs/Launchpad.md) page to setup account.
 
 ### Step 1: Set Up the Agent
 ##### For Debian/Ubuntu-based images
@@ -289,7 +289,7 @@ If all checks pass, the agent is successfully configured and operational!
 
 To customize your agent settings, refer to the [Configurations Guide](docs/Configurations.md).
 
-If you wish to view your manage profile, or view dashboards follow this [guide](docs/Launchpad.md).
+If you wish to view your manage profile, or view dashboards follow this [guide](docs/Launchpad_Setup.md).
 
 ## Features
 
