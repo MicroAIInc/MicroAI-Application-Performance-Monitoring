@@ -7,11 +7,19 @@ Welcome to the **official download page** for our software
 ## 🐧 Linux Downloads
 | Version | Architecture | Tar File                                                                                       |
 | ------- | ------------ | ---------------------------------------------------------------------------------------------- |
+| 4.1.2   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.2-linux-amd64.tar.gz) |
 | 4.1.1   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.1-linux-amd64.tar.gz) |
 
 ## Release Notes
 
-### Version 4.1.1 <sup><span style="background-color:#28a745;color:white;padding:2px 6px;border-radius:3px;font-size:0.8em;">Stable</span> </sup>  
+### Version 4.1.2 <sup><span style="background-color:#28a745;color:white;padding:2px 6px;border-radius:3px;font-size:0.8em;">Stable</span> </sup>  
+**Release Date:** July 23, 2025  
+
+#### 🚀 What's New
+- Introduced functionality to monitor application resource consumption
+- Introduced monitoring for application running state, including detection of up, down, and recover state
+
+### Version 4.1.1 
 **Release Date:** July 3, 2025  
 
 #### 🚀 What's New
