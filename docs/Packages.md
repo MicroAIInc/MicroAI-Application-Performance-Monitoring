@@ -12,7 +12,14 @@ Welcome to the **official download page** for our software
 
 ## Release Notes
 
-### Version 4.1.2 <sup><span style="background-color:#28a745;color:white;padding:2px 6px;border-radius:3px;font-size:0.8em;">Stable</span> </sup>  
+### Version 4.1.3 <sup><span style="background-color:#28a745;color:white;padding:2px 6px;border-radius:3px;font-size:0.8em;">Stable</span> </sup>  
+**Release Date:** Aug 05, 2025  
+
+#### 🚀 What's New
+- Resolved an issue where email notification links were directing users to a blank data page.
+- Addressed a bug in the data ingestion pipeline to ensure consistent and accurate data processing.
+
+### Version 4.1.2   
 **Release Date:** July 23, 2025  
 
 #### 🚀 What's New
