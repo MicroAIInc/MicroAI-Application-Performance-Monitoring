@@ -7,6 +7,7 @@ Welcome to the **official download page** for our software
 ## 🐧 Linux Downloads
 | Version | Architecture | Tar File                                                                                       |
 | ------- | ------------ | ---------------------------------------------------------------------------------------------- |
+| 4.1.3   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.3-linux-amd64.tar.gz) |
 | 4.1.2   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.2-linux-amd64.tar.gz) |
 | 4.1.1   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.1-linux-amd64.tar.gz) |
 
