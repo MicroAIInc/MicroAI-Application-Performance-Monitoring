@@ -24,6 +24,7 @@ Welcome to the **official download page** for our software
 >Update following parameters:
 >
 >MICROAI_AM_EMAIL_ICONS_BASE_URL=https://micro.ai
+>
 >ELASTIC_AGENT_PATH=/MicroAI_AM_agent/lib/elastic/java/elastic-apm-agent-1.55.1.jar
 
 
