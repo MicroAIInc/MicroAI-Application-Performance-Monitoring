@@ -82,13 +82,13 @@ RUN yum curl tar gzip \
 ```
 
 # Step 2
-RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.3-linux-amd64.tar.gz && \
+RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.5-linux-amd64.tar.gz && \
     tar -xzvf MicroAI_AM_agent.tar.gz && \
     rm MicroAI_AM_agent.tar.gz && \
     chmod +x MicroAI_AM_agent/bin/main
 
 # Step 3
-ENV ELASTIC_AGENT_PATH=/MicroAI_AM_agent/lib/elastic/java/elastic-apm-agent-1.52.0.jar
+ENV ELASTIC_AGENT_PATH=/MicroAI_AM_agent/lib/elastic/java/elastic-apm-agent-1.55.1.jar
 ENV MICROAI_AM_AGENT_HOST=http://127.0.0.1:8200
 ENV MICROAI_AM_JAVA_PACKAGES=<actual_package>
 
@@ -117,7 +117,7 @@ MICROAI_AM_EMAIL_PASSWORD=
 MICROAI_AM_EMAIL_FROM=
 MICROAI_AM_EMAIL_TO=
 MICROAI_AM_EMAIL_TRANSACTION_BASE_URL=https://cloud1-icedata.micro.ai
-MICROAI_AM_EMAIL_ICONS_URL=https://micro.ai
+MICROAI_AM_EMAIL_ICONS_BASE_URL=https://micro.ai
 MICROAI_AM_MQTT_HOST=
 MICROAI_AM_MQTT_PORT=
 MICROAI_AM_MQTT_USERNAME=
@@ -191,7 +191,7 @@ exec java -XX:+UseG1GC $JAVA_OPTS $MICROAI_OPS -jar demo-0.0.1-SNAPSHOT.jar /con
 ```
 
 # Step 2
-RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.3-linux-amd64.tar.gz && \
+RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.5-linux-amd64.tar.gz && \
     tar -xzvf MicroAI_AM_agent.tar.gz && \
     rm MicroAI_AM_agent.tar.gz && \
     chmod +x MicroAI_AM_agent/bin/main
@@ -233,7 +233,7 @@ MICROAI_AM_EMAIL_PASSWORD=
 MICROAI_AM_EMAIL_FROM=
 MICROAI_AM_EMAIL_TO=
 MICROAI_AM_EMAIL_TRANSACTION_BASE_URL=https://cloud1-icedata.micro.ai
-MICROAI_AM_EMAIL_ICONS_URL=https://micro.ai
+MICROAI_AM_EMAIL_ICONS_BASE_URL=https://micro.ai
 MICROAI_AM_MQTT_HOST=
 MICROAI_AM_MQTT_PORT=
 MICROAI_AM_MQTT_USERNAME=
