@@ -29,7 +29,7 @@ Welcome to the **official download page** for our software
 >- MICROAI_AM_TLS_ENABLED=true
 >
 >Dockerfile changes:
->- RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn-staging.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.23-linux-amd64.tar.gz && \
+>- RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.23-linux-amd64.tar.gz && \
     tar -xzvf MicroAI_AM_agent.tar.gz && \
     chmod +x MicroAI_AM_agent/lib/scripts/setup.sh && \
     ./MicroAI_AM_agent/lib/scripts/setup.sh 
