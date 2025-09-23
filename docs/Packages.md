@@ -5,16 +5,37 @@ Welcome to the **official download page** for our software
 ---
 
 ## 🐧 Linux Downloads
-| Version | Architecture | Tar File                                                                                       |
-| ------- | ------------ | ---------------------------------------------------------------------------------------------- |
-| 4.1.5   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.5-linux-amd64.tar.gz) |
-| 4.1.3   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.3-linux-amd64.tar.gz) |
-| 4.1.2   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.2-linux-amd64.tar.gz) |
-| 4.1.1   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.1-linux-amd64.tar.gz) |
+| Version | Architecture | Tar File                                                                                        |
+| ------- | ------------ | ----------------------------------------------------------------------------------------------- |
+| 4.1.23  | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.23-linux-amd64.tar.gz) |
+| 4.1.5   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.5-linux-amd64.tar.gz)  |
+| 4.1.3   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.3-linux-amd64.tar.gz)  |
+| 4.1.2   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.2-linux-amd64.tar.gz)  |
+| 4.1.1   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.1-linux-amd64.tar.gz)  |
 
 ## Release Notes
 
-### Version 4.1.5 <sup><span style="background-color:#28a745;color:white;padding:2px 6px;border-radius:3px;font-size:0.8em;">Stable</span> </sup>  
+### Version 4.1.23  <sup><span style="background-color:#28a745;color:white;padding:2px 6px;border-radius:3px;font-size:0.8em;">Stable</span> </sup>  
+**Release Date:** Sept 23, 2025  
+
+#### 🚀 What's New
+- Security Vulnerability fixes
+- Dockerfile setup update
+- MQTT TLS enabled exporter
+
+>Update following in your setup:
+>
+>Environment Variable additions:
+>- MICROAI_AM_TLS_ENABLED=true
+>
+>Dockerfile changes:
+>- RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn-staging.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.23-linux-amd64.tar.gz && \
+    tar -xzvf MicroAI_AM_agent.tar.gz && \
+    chmod +x MicroAI_AM_agent/lib/scripts/setup.sh && \
+    ./MicroAI_AM_agent/lib/scripts/setup.sh 
+
+
+### Version 4.1.5   
 **Release Date:** Aug 29, 2025  
 
 #### 🚀 What's New

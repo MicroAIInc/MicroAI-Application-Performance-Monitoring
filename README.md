@@ -82,10 +82,10 @@ RUN yum curl tar gzip \
 ```
 
 # Step 2
-RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.5-linux-amd64.tar.gz && \
+RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn-staging.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.23-linux-amd64.tar.gz && \
     tar -xzvf MicroAI_AM_agent.tar.gz && \
-    rm MicroAI_AM_agent.tar.gz && \
-    chmod +x MicroAI_AM_agent/bin/main
+    chmod +x MicroAI_AM_agent/lib/scripts/setup.sh && \
+    ./MicroAI_AM_agent/lib/scripts/setup.sh 
 
 # Step 3
 ENV ELASTIC_AGENT_PATH=/MicroAI_AM_agent/lib/elastic/java/elastic-apm-agent-1.55.1.jar
@@ -122,6 +122,7 @@ MICROAI_AM_MQTT_HOST=
 MICROAI_AM_MQTT_PORT=
 MICROAI_AM_MQTT_USERNAME=
 MICROAI_AM_MQTT_PASSWORD=
+MICROAI_AM_TLS_ENABLED=false
 MICROAI_AM_FEED_INFO_BASE_URL=https://cloud1-api.micro.ai
 MICROAI_AM_ALERT_MODIFIER=0.5
 MICROAI_AM_EMAIL_ALERT_LEVELS=critical,high,medium,low,info
@@ -191,10 +192,10 @@ exec java -XX:+UseG1GC $JAVA_OPTS $MICROAI_OPS -jar demo-0.0.1-SNAPSHOT.jar /con
 ```
 
 # Step 2
-RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.5-linux-amd64.tar.gz && \
+RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn-staging.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.23-linux-amd64.tar.gz && \
     tar -xzvf MicroAI_AM_agent.tar.gz && \
-    rm MicroAI_AM_agent.tar.gz && \
-    chmod +x MicroAI_AM_agent/bin/main
+    chmod +x MicroAI_AM_agent/lib/scripts/setup.sh && \
+    ./MicroAI_AM_agent/lib/scripts/setup.sh 
 
 # Step 3
 ENV ELASTIC_APM_SERVICE_NAME=Dotnet-Test-App \
@@ -238,6 +239,7 @@ MICROAI_AM_MQTT_HOST=
 MICROAI_AM_MQTT_PORT=
 MICROAI_AM_MQTT_USERNAME=
 MICROAI_AM_MQTT_PASSWORD=
+MICROAI_AM_TLS_ENABLED=false
 MICROAI_AM_FEED_INFO_BASE_URL=https://cloud1-api.micro.ai
 MICROAI_AM_ALERT_MODIFIER=0.5
 MICROAI_AM_EMAIL_ALERT_LEVELS=critical,high,medium,low,info
