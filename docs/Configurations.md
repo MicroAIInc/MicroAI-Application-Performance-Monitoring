@@ -16,6 +16,7 @@ The configuration file is done from environment variables.
 Understanding the environment variables and their effect on agent.
 
 - <ins>MICROAI_AM_ENABLE_AGENT</ins> - (Boolean value) Enables/Disables agent. Default behavior is disable if value not set
+- <ins>MICROAI_AM_ENABLE_LAUNCHPAD_DATA</ins> - (Boolean value) Enables/Disables agent's ability to send data to launchpad dashboards
 - <ins>MICROAI_AM_ENVIRONMENT</ins> - (String value) Environment of the application where it is running
 - <ins>MICROAI_AM_PROFILE_KEY</ins> - (String value) MicroAI Launchpad profile key
 - <ins>MICROAI_AM_TRAINING_ROWS</ins> - (Integer value) Number of call/transaction per API to use for training
@@ -36,6 +37,8 @@ Understanding the environment variables and their effect on agent.
 - <ins>MICROAI_AM_FEED_INFO_BASE_URL</ins> - Used for Internal Launchpad - (String value) - Use for activating Agent with Launchpad
 - <ins>MICROAI_AM_ALERT_MODIFIER</ins> - (Float value) Used for controlling AI Alert detection sensitivity 
 - <ins>MICROAI_AM_EMAIL_ALERT_LEVELS</ins> - (String - Support comma separated) Used for only sending specific alerts. Example Value: critical,high,medium,low,info
+- <ins>MICROAI_AM_TLS_ENABLED</ins> - (Boolean value) Used for enabling MQTT TLS connection
+
 ## Enabling Email Alerts for Security Events
 
 The Email Notification Exporter enables the system to send automated email alerts based on predefined security events. Users can configure SMTP settings to integrate with their email servers and specify alert severity levels to control which notifications are sent. Alerts can be filtered based on severity levels ranging from Critical to Informational, ensuring that users receive only the most relevant notifications.
