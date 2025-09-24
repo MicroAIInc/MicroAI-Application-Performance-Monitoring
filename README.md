@@ -199,7 +199,8 @@ RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn.micro.ai/MicroAI_AM_Agent/
 
 # Step 3
 ENV ELASTIC_APM_SERVICE_NAME=Dotnet-Test-App \
-		CORECLR_PROFILER={FA65FE15-F085-4681-9B20-95E04F6C03CC} \ CORECLR_PROFILER_PATH=/MicroAI_AM_agent/lib/elastic/aspdotnet/libelastic_apm_profiler.so \
+	CORECLR_PROFILER={FA65FE15-F085-4681-9B20-95E04F6C03CC} \ 
+	CORECLR_PROFILER_PATH=/MicroAI_AM_agent/lib/elastic/aspdotnet/libelastic_apm_profiler.so \
 	ELASTIC_APM_PROFILER_HOME=/MicroAI_AM_agent/lib/elastic/aspdotnet \
 	ELASTIC_APM_PROFILER_INTEGRATIONS=/MicroAI_AM_agent/lib/elastic/aspdotnet/integrations.yml
 
