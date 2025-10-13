@@ -38,6 +38,11 @@ Understanding the environment variables and their effect on agent.
 - <ins>MICROAI_AM_ALERT_MODIFIER</ins> - (Float value) Used for controlling AI Alert detection sensitivity 
 - <ins>MICROAI_AM_EMAIL_ALERT_LEVELS</ins> - (String - Support comma separated) Used for only sending specific alerts. Example Value: critical,high,medium,low,info
 - <ins>MICROAI_AM_TLS_ENABLED</ins> - (Boolean value) Used for enabling MQTT TLS connection
+- <ins>MICROAI_AM_ENABLE_ON_ALERT</ins> - (Boolean value) Enables the agent to only send data when there an alert
+- <ins>MICROAI_AM_ALERT_DATA_CAPTURE_DURATION_MINUTES</ins> - (Integer value) Allows the user to configure a window of data to be captured when an alert happens
+- <ins>MICROAI_AM_LAUNCHPAD_ACCESSTOKEN_URL</ins> - Used for Internal Launchpad - (String value) - Use for sending data to Launchpad for Dashboard and Alerts
+- <ins>MICROAI_AM_LAUNCHPAD_USERNAME</ins> - (String value) Used for authenticating agent with user's account
+- <ins>MICROAI_AM_LAUNCHPAD_PASSWORD</ins> - (String value) Used for authenticating agent with user's account
 
 ## Enabling Email Alerts for Security Events
 

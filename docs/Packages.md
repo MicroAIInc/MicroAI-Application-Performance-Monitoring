@@ -7,6 +7,7 @@ Welcome to the **official download page** for our software
 ## 🐧 Linux Downloads
 | Version | Architecture | Tar File                                                                                        |
 | ------- | ------------ | ----------------------------------------------------------------------------------------------- |
+| 4.2.0   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.2.0-linux-amd64.tar.gz)  |
 | 4.1.23  | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.23-linux-amd64.tar.gz) |
 | 4.1.5   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.5-linux-amd64.tar.gz)  |
 | 4.1.3   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.3-linux-amd64.tar.gz)  |
@@ -15,7 +16,23 @@ Welcome to the **official download page** for our software
 
 ## Release Notes
 
-### Version 4.1.23  <sup><span style="background-color:#28a745;color:white;padding:2px 6px;border-radius:3px;font-size:0.8em;">Stable</span> </sup>  
+### Version 4.2.0  <sup><span style="background-color:#28a745;color:white;padding:2px 6px;border-radius:3px;font-size:0.8em;">Stable</span> </sup>
+**Release Date:** Oct 13, 2025  
+
+#### 🚀 What's New
+- Security Vulnerability fixes
+- **On Alert Data:** Introduced a mode that minimizes data sent to the cloud. Users can now configure how much data to upload when an alert occurs — including the **N minutes before** and **N minutes after** the event.
+
+>Update following in your setup:
+>
+>Environment Variable additions:
+>- MICROAI_AM_ENABLE_ON_ALERT=true
+>-  MICROAI_AM_ALERT_DATA_CAPTURE_DURATION_MINUTES=15
+>- MICROAI_AM_LAUNCHPAD_ACCESSTOKEN_URL=https://cloud1-coreapi.micro.ai
+>- MICROAI_AM_LAUNCHPAD_USERNAME={user's launchpad username}
+>- MICROAI_AM_LAUNCHPAD_PASSWORD={user's launchpad password}
+
+### Version 4.1.23   
 **Release Date:** Sept 23, 2025  
 
 #### 🚀 What's New
