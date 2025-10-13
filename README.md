@@ -82,7 +82,7 @@ RUN yum curl tar gzip \
 ```
 
 # Step 2
-RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.23-linux-amd64.tar.gz && \
+RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.2.0-linux-amd64.tar.gz && \
     tar -xzvf MicroAI_AM_agent.tar.gz && \
     chmod +x MicroAI_AM_agent/lib/scripts/setup.sh && \
     ./MicroAI_AM_agent/lib/scripts/setup.sh 
@@ -197,7 +197,7 @@ exec java -XX:+UseG1GC $JAVA_OPTS $MICROAI_OPS -jar demo-0.0.1-SNAPSHOT.jar /con
 ```
 
 # Step 2
-RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.23-linux-amd64.tar.gz && \
+RUN curl -L -o MicroAI_AM_agent.tar.gz https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.2.0-linux-amd64.tar.gz && \
     tar -xzvf MicroAI_AM_agent.tar.gz && \
     chmod +x MicroAI_AM_agent/lib/scripts/setup.sh && \
     ./MicroAI_AM_agent/lib/scripts/setup.sh 
