@@ -10,7 +10,7 @@
 - **External Data Exporter:** Exports collected data to third-party visualization tools.
 - **Lightweight:** - Agent is design to be lightweight
 - **Creativity at its best:** - Integrated always-on prometheus exporter allows the data to be available for prometheus server to capture and visualize it in any form on Grafana.
-	- Setup Prometheus and Grafana click [here](docs/Grafana-Extension.md)
+	- Setup Prometheus and Grafana click [here](Grafana-Extension.md)
 ## Monitoring Features
 
 - **Dynamic learning as new endpoints are called** - Agent will learn about endpoints during the runtime
