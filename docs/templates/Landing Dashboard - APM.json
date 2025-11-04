@@ -1,0 +1,639 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "12.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Service Name"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Go to Service dashboard",
+                    "url": "/d/aerc8jlvhgykgb/device?var-Environment=${__data.fields.Environment}&var-Application=${__data.fields[\"Service Name\"]}&${__url_time_range}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg by (environment, service_name) (\r\n  avg_over_time(apm_latency{\r\n    environment=~\"$environment\"\r\n  }[$__range])\r\n)\r\n\r\n",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by (environment,service_name)(count_over_time(apm_transaction_event{\r\n  environment=~\"$environment\"\r\n  \r\n}[$__range]))\r\n/\r\n(\r\n  (${__range_s}) / 60 + 1\r\n)\r\n\r\n",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(\r\n  sum by (environment,service_name)(count_over_time(apm_transaction_status{\r\n    environment=~\"$environment\",\r\n    transaction_status=~\"5..\"\r\n  }[$__range]))\r\n  /\r\n  sum by (environment,service_name)(count_over_time(apm_transaction_status{\r\n    environment=~\"$environment\"\r\n  }[$__range]))\r\n) * 100\r\nor\r\n(\r\n  sum by (environment,service_name)(count_over_time(apm_transaction_status{\r\n    environment=~\"$environment\"\r\n  }[$__range])) * 0\r\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "C"
+        }
+      ],
+      "title": "Environments and Services",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Value #A": 2,
+              "Value #B": 3,
+              "Value #C": 4,
+              "environment": 0,
+              "service_name": 1
+            },
+            "renameByName": {
+              "Value #A": "Avg_Latency(ms)",
+              "Value #B": "Throughput(tpm)",
+              "Value #C": "Failed transaction rate(%)",
+              "environment": "Environment",
+              "service_name": "Service Name"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "noValue": "",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Level"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "critical": {
+                        "index": 0,
+                        "text": "Error"
+                      },
+                      "high": {
+                        "index": 1,
+                        "text": "Error"
+                      },
+                      "low": {
+                        "index": 3,
+                        "text": "Warning"
+                      },
+                      "medium": {
+                        "index": 2,
+                        "text": "Warning"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Timestamp"
+          }
+        ]
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "label_replace(last_over_time(apm_alert{environment=~\"$environment\",endpoint_name!=\"\",severity!=\"Info\"}[$__range]), \"start_time\", \"$1 $2\", \"start_time\", \"(.*)T(.*)Z\")",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Transaction Alerts",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNull",
+                  "options": {}
+                },
+                "fieldName": "Value"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Level",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "severity"
+              ],
+              "reducer": "last"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Timestamp",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "start_time"
+              ],
+              "reducer": "last"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "Timestamp"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "device_id": true,
+              "instance": true,
+              "job": true,
+              "labels": true,
+              "platform": true,
+              "series_id": true,
+              "service_type": true,
+              "severity": true,
+              "start_time": true,
+              "text_json": true,
+              "type": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Level": 5,
+              "Timestamp": 0,
+              "alert": 6,
+              "endpoint_name": 4,
+              "environment": 1,
+              "hostname": 3,
+              "root_cause": 7,
+              "service_name": 2
+            },
+            "renameByName": {
+              "Level": "Level",
+              "Timestamp": "Timestamp",
+              "alert": "Description",
+              "endpoint_name": "Endpoint",
+              "environment": "Environment",
+              "hostname": "Hostname",
+              "root_cause": "Root Cause",
+              "service_name": "Service Name"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "noValue": "",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Level"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "critical": {
+                        "index": 0,
+                        "text": "Error"
+                      },
+                      "high": {
+                        "index": 1,
+                        "text": "Error"
+                      },
+                      "low": {
+                        "index": 3,
+                        "text": "Warning"
+                      },
+                      "medium": {
+                        "index": 2,
+                        "text": "Warning"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 4,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Timestamp"
+          }
+        ]
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "label_replace(last_over_time(apm_alert{environment=~\"$environment\",endpoint_name=\"\",severity!=\"Info\"}[$__range]), \"start_time\", \"$1 $2\", \"start_time\", \"(.*)T(.*)Z\")",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Metrics Alerts",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNull",
+                  "options": {}
+                },
+                "fieldName": "Value"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Level",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "severity"
+              ],
+              "reducer": "last"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "device_id": true,
+              "endpoint_name": true,
+              "instance": true,
+              "job": true,
+              "labels": true,
+              "platform": true,
+              "series_id": true,
+              "service_type": true,
+              "severity": true,
+              "text_json": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Level": 5,
+              "alert": 6,
+              "environment": 1,
+              "hostname": 3,
+              "root_cause": 7,
+              "service_name": 2,
+              "start_time": 0,
+              "type": 4
+            },
+            "renameByName": {
+              "Level": "Level",
+              "alert": "Description",
+              "environment": "Environment",
+              "hostname": "Hostname",
+              "root_cause": "Root Cause",
+              "service_name": "Service Name",
+              "start_time": "Timestamp",
+              "type": "Type"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "1d",
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "definition": "label_values(apm_environment,environment)",
+        "includeAll": true,
+        "label": "Environment",
+        "name": "environment",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(apm_environment,environment)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "Landing Dashboard - APM",
+  "uid": "ael7bdc33wkqoc",
+  "version": 7,
+  "weekStart": ""
+}

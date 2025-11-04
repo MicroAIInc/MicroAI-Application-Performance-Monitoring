@@ -7,6 +7,7 @@ Welcome to the **official download page** for our software
 ## 🐧 Linux Downloads
 | Version | Architecture | Tar File                                                                                        |
 | ------- | ------------ | ----------------------------------------------------------------------------------------------- |
+| 4.2.5   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.2.5-linux-amd64.tar.gz)  |
 | 4.2.4   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.2.4-linux-amd64.tar.gz)  |
 | 4.2.0   | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.2.0-linux-amd64.tar.gz)  |
 | 4.1.23  | **x64**      | [Download](https://maicdn.micro.ai/MicroAI_AM_Agent/MicroAI_AM_agent_4.1.23-linux-amd64.tar.gz) |
@@ -17,8 +18,14 @@ Welcome to the **official download page** for our software
 
 ## Release Notes
 
+### Version 4.2.5 Stable 
+**Release Date:** Nov 4, 2025  
+
+#### 🚀 What's New
+- Prometheus and Grafana support enhancement and dashboard templates available under templates folder
+
 ### Version 4.2.4 <sup><span style="background-color:#28a745;color:white;padding:2px 6px;border-radius:3px;font-size:0.8em;">Stable</span> </sup>
-**Release Date:** Oct 13, 2025  
+**Release Date:** Oct 29, 2025  
 
 #### 🚀 What's New
 - Enhanced alerts - Alerts now includes top 5 worst transactions that occurred during the observation window.

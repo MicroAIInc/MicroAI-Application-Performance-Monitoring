@@ -1,0 +1,1635 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "12.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "reqpm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 5,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg(\n  sum by (transaction_name, method, service_name)(\n    count_over_time(apm_transaction_event{\n      environment=~\"$Environment\",\n      service_name=~\"$Application\",\n      transaction_name=~\"$Transaction\",\n      hostname=~\"$Hostname\",\n      event=\"TRANSACTION\"\n    }[$__range])\n  )\n  /\n  (\n    (${__range_s}) / 60 + 1\n  )\n)",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Throughput",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Transactions"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Transaction Detail Dashboard",
+                    "url": "/d/beueyx913iqyoc/am-transaction-detail?var-Application=${Application:percentencode}&var-Transaction=${__data.fields.Transactions:percentencode}&${__url_time_range}"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 230
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 19,
+        "x": 5,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg by(transaction_name,method,service_name) (avg_over_time(apm_latency{\r\n    environment=~\"$Environment\",\r\n    service_name=~\"$Application\",\r\n    transaction_name=~\"$Transaction\",\r\n    hostname=~\"$Hostname\",\r\n    event=\"TRANSACTION\"\r\n  }[$__range]))",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(\r\n  sum by (transaction_name,method,service_name)(count_over_time(apm_transaction_status{\r\n    environment=~\"$Environment\",\r\n    service_name=~\"$Application\",\r\n    transaction_name=~\"$Transaction\",\r\n    hostname=~\"$Hostname\",\r\n    transaction_status=~\"5..\",event=\"TRANSACTION\"\r\n  }[$__range]))\r\n  /\r\n  sum by (transaction_name,method,service_name)(count_over_time(apm_transaction_status{\r\n    environment=~\"$Environment\",\r\n    service_name=~\"$Application\",\r\n    transaction_name=~\"$Transaction\",\r\n    hostname=~\"$Hostname\",\r\n    event=\"TRANSACTION\"\r\n  }[$__range]))\r\n) * 100\r\nor\r\n(\r\n  sum by (transaction_name,method,service_name)(count_over_time(apm_transaction_status{\r\n    environment=~\"$Environment\",\r\n    service_name=~\"$Application\",\r\n    transaction_name=~\"$Transaction\",\r\n    hostname=~\"$Hostname\",\r\n    event=\"TRANSACTION\"\r\n  }[$__range])) * 0\r\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by (transaction_name, method,service_name)(count_over_time(apm_transaction_event{\r\n  environment=~\"$Environment\",\r\n  service_name=~\"$Application\",\r\n  transaction_name=~\"$Transaction\",\r\n  hostname=~\"$Hostname\",\r\n  event=\"TRANSACTION\"\r\n}[$__range]))\r\n/\r\n(\r\n  (${__range_s}) / 60 + 1\r\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "C"
+        }
+      ],
+      "title": "Transactions",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "method": false,
+              "service_name": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Value #A": 2,
+              "Value #B": 4,
+              "Value #C": 3,
+              "method": 1,
+              "transaction_name": 0
+            },
+            "renameByName": {
+              "Value #A": "Avg_Latency(ms)",
+              "Value #B": "Failed transaction rate(%)",
+              "Value #C": "Throughput(tpm)",
+              "method": "Method",
+              "transaction_name": "Transactions"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 0,
+        "y": 9
+      },
+      "id": 7,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg(\n  (\n    sum by (transaction_name, method, service_name)(count_over_time(apm_transaction_status{\n      environment=~\"$Environment\",\n      service_name=~\"$Application\",\n      transaction_name=~\"$Transaction\",\n      hostname=~\"$Hostname\",\n      transaction_status=~\"5..\",\n      event=\"TRANSACTION\"\n    }[$__range]))\n    /\n    sum by (transaction_name, method, service_name)(count_over_time(apm_transaction_status{\n      environment=~\"$Environment\",\n      service_name=~\"$Application\",\n      transaction_name=~\"$Transaction\",\n      hostname=~\"$Hostname\",\n      event=\"TRANSACTION\"\n    }[$__range]))\n  ) * 100\n)\nor\navg(\n  sum by (transaction_name, method, service_name)(count_over_time(apm_transaction_status{\n    environment=~\"$Environment\",\n    service_name=~\"$Application\",\n    transaction_name=~\"$Transaction\",\n    hostname=~\"$Hostname\",\n    event=\"TRANSACTION\"\n  }[$__range])) * 0\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Failed transaction rate(%)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "decimals": 2,
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 19,
+        "x": 5,
+        "y": 9
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg by (transaction_sub_type) (\n  avg_over_time(apm_latency{\n    environment=~\"$Environment\",\n    service_name=~\"$Application\",\n    hostname=~\"$Hostname\",\n    event=\"SPAN\",\n    transaction_sub_type!=\"\"\n  }[$__range])\n)",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(\n  sum by (transaction_sub_type)(count_over_time(apm_transaction_status{\n    environment=~\"$Environment\",\n    service_name=~\"$Application\",\n    hostname=~\"$Hostname\",\n    transaction_status=~\"5..\",\n    event=\"SPAN\",\n    transaction_sub_type!=\"\"\n  }[$__range]))\n  /\n  sum by (transaction_sub_type)(count_over_time(apm_transaction_status{\n    environment=~\"$Environment\",\n    service_name=~\"$Application\",\n    hostname=~\"$Hostname\",\n    event=\"SPAN\",\n    transaction_sub_type!=\"\"\n  }[$__range]))\n) * 100\nor\n(\n  sum by (transaction_sub_type)(count_over_time(apm_transaction_status{\n    environment=~\"$Environment\",\n    service_name=~\"$Application\",\n    hostname=~\"$Hostname\",\n    event=\"SPAN\",\n    transaction_sub_type!=\"\"\n  }[$__range])) * 0\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by (transaction_sub_type)(count_over_time(apm_transaction_event{\n  environment=~\"$Environment\",\n  service_name=~\"$Application\",\n  hostname=~\"$Hostname\",\n  event=\"SPAN\",\n  transaction_sub_type!=\"\"\n}[$__range]))\n/\n(\n  (${__range_s}) / 60 + 1\n)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "C"
+        }
+      ],
+      "title": "Dependencies",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Value #A": 1,
+              "Value #B": 3,
+              "Value #C": 2,
+              "transaction_sub_type": 0
+            },
+            "renameByName": {
+              "Value #A": "Avg_Latency(ms)",
+              "Value #B": "Failed transaction rate(%)",
+              "Value #C": "Throughput(tpm)",
+              "transaction_sub_type": "Dependencies"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#477f3d",
+            "mode": "shades"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 17
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(count_over_time(apm_transaction_status_code_series{\n  environment=~\"$Environment\",\n  service_name=~\"$Application\",\n  transaction_name=~\"$Transaction\",\n  hostname=~\"$Hostname\",\n  status_code_series=\"HTTP 2xx\"\n}[$__range]))",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "HTTP Status 2XX",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#3786ec",
+            "mode": "shades"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 17
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(count_over_time(apm_transaction_status_code_series{\n  environment=~\"$Environment\",\n  service_name=~\"$Application\",\n  transaction_name=~\"$Transaction\",\n  hostname=~\"$Hostname\",\n  status_code_series=\"HTTP 3xx\"\n}[$__range]))",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "HTTP Status 3XX",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#2c74ea",
+            "mode": "shades"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 17
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(count_over_time(apm_transaction_status_code_series{\n  environment=~\"$Environment\",\n  service_name=~\"$Application\",\n  transaction_name=~\"$Transaction\",\n  hostname=~\"$Hostname\",\n  status_code_series=\"HTTP 5xx\"\n}[$__range]))",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "HTTP Status 5XX",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#3480ec",
+            "mode": "shades"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 17
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(count_over_time(apm_transaction_status_code_series{\n  environment=~\"$Environment\",\n  service_name=~\"$Application\",\n  transaction_name=~\"$Transaction\",\n  hostname=~\"$Hostname\",\n  status_code_series=\"HTTP 4xx\"\n}[$__range]))",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "HTTP Status 4XX",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU System Avg(%)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU Process Avg(%)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Available Memory(GB)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decgbytes"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Application Memory Usage(GB)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decgbytes"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 5,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "CPU System Avg(%)"
+          }
+        ]
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg_over_time(apm_cpu_system_average{environment=~\"$Environment\", service_name=~\"$Application\", hostname=~\"$Hostname\"}[$__range])",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg_over_time(apm_cpu_process_average{environment=~\"$Environment\", service_name=~\"$Application\", hostname=~\"$Hostname\"}[$__range])",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg_over_time(apm_system_memory_usage_avg_total{environment=~\"$Environment\", service_name=~\"$Application\", hostname=~\"$Hostname\"}[$__range])",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg_over_time(apm_system_memory_usage_avg{environment=~\"$Environment\", service_name=~\"$Application\", hostname=~\"$Hostname\"}[$__range])",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "D"
+        }
+      ],
+      "title": "Instances",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "hostname",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "CPU System Avg(%)",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value #A"
+                }
+              },
+              "operator": "*",
+              "right": {
+                "fixed": "100"
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "CPU Process Avg(%)",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value #B"
+                }
+              },
+              "operator": "*",
+              "right": {
+                "fixed": "100"
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Available Memory(GB)",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value #C"
+                }
+              },
+              "operator": "/",
+              "right": {
+                "fixed": "1073741824"
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Application Memory Usage(GB)",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value #D"
+                }
+              },
+              "operator": "/",
+              "right": {
+                "fixed": "1073741824"
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time 1": true,
+              "Time 2": true,
+              "Time 3": true,
+              "Time 4": true,
+              "Value #A": true,
+              "Value #B": true,
+              "Value #C": true,
+              "Value #D": true,
+              "device_id 1": true,
+              "device_id 2": true,
+              "device_id 3": true,
+              "device_id 4": true,
+              "environment 1": true,
+              "environment 2": true,
+              "environment 3": true,
+              "environment 4": true,
+              "instance 1": true,
+              "instance 2": true,
+              "instance 3": true,
+              "instance 4": true,
+              "job 1": true,
+              "job 2": true,
+              "job 3": true,
+              "job 4": true,
+              "platform 1": true,
+              "platform 2": true,
+              "platform 3": true,
+              "platform 4": true,
+              "service_name 1": true,
+              "service_name 2": true,
+              "service_name 3": true,
+              "service_name 4": true,
+              "service_type 1": true,
+              "service_type 2": true,
+              "service_type 3": true,
+              "service_type 4": true,
+              "start_time 1": true,
+              "start_time 2": true,
+              "start_time 3": true,
+              "start_time 4": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Application Memory Usage(GB)": 4,
+              "Available Memory(GB)": 3,
+              "CPU Process Avg(%)": 2,
+              "CPU System Avg(%)": 1,
+              "hostname": 0
+            },
+            "renameByName": {
+              "hostname": "Hostname"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "noValue": "",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Level"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "Critical": {
+                        "index": 1,
+                        "text": "Error"
+                      },
+                      "High": {
+                        "index": 0,
+                        "text": "Error"
+                      },
+                      "Low": {
+                        "index": 3,
+                        "text": "Warning"
+                      },
+                      "Medium": {
+                        "index": 2,
+                        "text": "Warning"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 10,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Timestamp"
+          }
+        ]
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "label_replace(last_over_time(apm_alert{environment=~\"$Environment\",service_name=~\"$Application\",hostname=~\"$Hostname\",endpoint_name!=\"\",severity!=\"Info\"}[$__range]), \"start_time\", \"$1 $2\", \"start_time\", \"(.*)T(.*)Z\")",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Transaction Alerts",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNull",
+                  "options": {}
+                },
+                "fieldName": "Value"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Level",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "severity"
+              ],
+              "reducer": "last"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Timestamp",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "start_time"
+              ],
+              "reducer": "last"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "Timestamp"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "device_id": true,
+              "environment": true,
+              "instance": true,
+              "job": true,
+              "labels": true,
+              "platform": true,
+              "series_id": true,
+              "service_name": true,
+              "service_type": true,
+              "severity": true,
+              "start_time": true,
+              "text_json": true,
+              "type": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Level": 3,
+              "Timestamp": 0,
+              "alert": 4,
+              "endpoint_name": 2,
+              "hostname": 1,
+              "root_cause": 5
+            },
+            "renameByName": {
+              "Level": "Level",
+              "Timestamp": "Timestamp",
+              "alert": "Description",
+              "endpoint_name": "Endpoint",
+              "hostname": "Hostname",
+              "root_cause": "Root Cause"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "noValue": "",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Level"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "critical": {
+                        "index": 1,
+                        "text": "Error"
+                      },
+                      "high": {
+                        "index": 0,
+                        "text": "Error"
+                      },
+                      "low": {
+                        "index": 3,
+                        "text": "Warning"
+                      },
+                      "medium": {
+                        "index": 2,
+                        "text": "Warning"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "id": 15,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Timestamp"
+          }
+        ]
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "label_replace(last_over_time(apm_alert{environment=~\"$Environment\",service_name=~\"$Application\",hostname=~\"$Hostname\",endpoint_name=\"\",severity!=\"Info\"}[$__range]), \"start_time\", \"$1 $2\", \"start_time\", \"(.*)T(.*)Z\")",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Metrics Alerts",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNull",
+                  "options": {}
+                },
+                "fieldName": "Value"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Level",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "severity"
+              ],
+              "reducer": "last"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Timestamp",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "start_time"
+              ],
+              "reducer": "last"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "Timestamp"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "device_id": true,
+              "endpoint_name": true,
+              "environment": true,
+              "instance": true,
+              "job": true,
+              "labels": true,
+              "platform": true,
+              "series_id": true,
+              "service_name": true,
+              "service_type": true,
+              "severity": true,
+              "start_time": true,
+              "text_json": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Level": 3,
+              "Timestamp": 0,
+              "alert": 4,
+              "hostname": 1,
+              "root_cause": 5,
+              "type": 2
+            },
+            "renameByName": {
+              "Level": "Level",
+              "Timestamp": "Timestamp",
+              "alert": "Description",
+              "hostname": "Hostname",
+              "root_cause": "Root Cause",
+              "type": "Type"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "1d",
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "definition": "label_values(apm_environment,environment)",
+        "includeAll": false,
+        "name": "Environment",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(apm_environment,environment)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {},
+        "definition": "label_values(apm_service_name{environment=~\"$Environment\"},service_name)",
+        "hide": 1,
+        "includeAll": false,
+        "label": "Service",
+        "name": "Application",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(apm_service_name{environment=~\"$Environment\"},service_name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {},
+        "definition": "label_values(apm_latency{environment=~\"$Environment\",service_name=~\"$Application\",event=\"TRANSACTION\"},transaction_name)",
+        "includeAll": true,
+        "name": "Transaction",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(apm_latency{environment=~\"$Environment\",service_name=~\"$Application\",event=\"TRANSACTION\"},transaction_name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {},
+        "definition": "label_values(apm_latency{environment=~\"$Environment\",service_name=~\"$Application\"},hostname)",
+        "includeAll": true,
+        "name": "Hostname",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(apm_latency{environment=~\"$Environment\",service_name=~\"$Application\"},hostname)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "Service Detail Dashboard - APM",
+  "uid": "aerc8jlvhgykgb",
+  "version": 14,
+  "weekStart": ""
+}
