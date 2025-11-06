@@ -83,44 +83,7 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Duration(ms)"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 150
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 200
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "transaction_name"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 400
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 10,
@@ -142,7 +105,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Time"
+            "displayName": "Timestamp"
           }
         ]
       },
@@ -155,7 +118,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "last_over_time(\n  apm_latency{\n    event=\"TRANSACTION\",\n    transaction_id=\"$Trace_ID\"\n  }[$__range]\n)",
+          "expr": "label_replace(last_over_time(apm_latency{event=\"TRANSACTION\",transaction_id=\"$Trace_ID\"}[$__range]), \"start_time\", \"$1 $2\", \"start_time\", \"(.*)T(.*)Z\")",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
@@ -166,9 +129,36 @@
       "title": "Transaction Traces",
       "transformations": [
         {
+          "id": "calculateField",
+          "options": {
+            "alias": "Timestamp",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "start_time"
+              ],
+              "reducer": "last"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "Timestamp"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
+              "Time": true,
               "__name__": true,
               "address": true,
               "device_id": true,
@@ -185,6 +175,7 @@
               "request_endpoint": true,
               "service_name": true,
               "service_type": true,
+              "start_time": true,
               "status_code_series": true,
               "transaction_id": true,
               "transaction_status": true,
@@ -192,12 +183,12 @@
             },
             "includeByName": {},
             "indexByName": {
-              "Time": 0,
+              "Timestamp": 0,
               "Value": 2,
               "transaction_name": 1
             },
             "renameByName": {
-              "Time": "Timestamp",
+              "Timestamp": "Timestamp",
               "Value": "Duration(ms)",
               "transaction_name": "Transaction Name"
             }
@@ -237,56 +228,7 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Duration(ms)"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 150
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Time"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 200
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Span Name"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 300
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Address"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 250
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 10,
@@ -308,7 +250,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Time"
+            "displayName": "Timestamp"
           }
         ]
       },
@@ -321,7 +263,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "last_over_time(\n  apm_latency{\n    event=\"SPAN\",\n    transaction_parent_id=~\"$Trace_ID\"\n  }[$__range]\n)",
+          "expr": "label_replace(last_over_time(apm_latency{event=\"SPAN\",transaction_parent_id=~\"$Trace_ID\"}[$__range]), \"start_time\", \"$1 $2\", \"start_time\", \"(.*)T(.*)Z\")",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
@@ -332,9 +274,36 @@
       "title": "Spans",
       "transformations": [
         {
+          "id": "calculateField",
+          "options": {
+            "alias": "Timestamp",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "start_time"
+              ],
+              "reducer": "last"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "Timestamp"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
           "id": "organize",
           "options": {
             "excludeByName": {
+              "Time": true,
               "__name__": true,
               "device_id": true,
               "environment": true,
@@ -348,6 +317,7 @@
               "port": true,
               "service_name": true,
               "service_type": true,
+              "start_time": true,
               "transaction_id": true,
               "transaction_parent_id": true,
               "transaction_status": true,
@@ -356,13 +326,13 @@
             },
             "includeByName": {},
             "indexByName": {
-              "Time": 0,
+              "Timestamp": 0,
               "Value": 3,
               "address": 2,
               "transaction_name": 1
             },
             "renameByName": {
-              "Time": "Timestamp",
+              "Timestamp": "Timestamp",
               "Value": "Duration(ms)",
               "address": "Address",
               "transaction_name": "Span Name"
@@ -406,6 +376,6 @@
   "timezone": "utc",
   "title": "Transaction Traces Dashboard - APM",
   "uid": "feutcdqviszcwd",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
