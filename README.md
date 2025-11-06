@@ -1,5 +1,5 @@
 <p align="right">
-  <img src="https://img.shields.io/badge/MicroAI_AM_agent-3.0.0_-green" alt="Static Badge">
+  <img src="https://img.shields.io/badge/MicroAI_AM_agent-4.2.5_-green" alt="Static Badge">
 </p>
 <br />
 <p align="center">
