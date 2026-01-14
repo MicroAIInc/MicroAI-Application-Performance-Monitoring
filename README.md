@@ -338,6 +338,6 @@ See [Software Licensing Agreement](License.txt) for more details.
 ## Contact
 
 - **Company:** MicroAI™
-- **Website:** [www.security.micro.ai](https://www.security.micro.ai)
+- **Website:** [https://smartapm.micro.ai/](https://smartapm.micro.ai/)
 - **Email:** [support@micro.ai](mailto\:support@micro.ai)
 
