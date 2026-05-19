@@ -124,6 +124,7 @@ MICROAI_AM_EMAIL_ALERT_LEVELS=critical,high,medium,low,info
 MICROAI_AM_ENABLE_ON_ALERT=true
 MICROAI_AM_ALERT_DATA_CAPTURE_DURATION_MINUTES=15
 MICROAI_AM_SEND_AGGREGATE_EVERY_N_MIN=60
+MICROAI_TRANSACTION_SAMPLE_RATE=1.0
 
 ```
 
@@ -165,7 +166,9 @@ if check_env_vars && $MICROAI_AM_ENABLE_AGENT == true; then
             -Delastic.apm.server_url=$MICROAI_AM_AGENT_URL 
             -Delastic.apm.environment=$MICROAI_AM_ENVIRONMENT 
             -Delastic.apm.service_name=$SERVICE
-            -Delastic.apm.application_packages=$MICROAI_AM_JAVA_PACKAGES"
+            -Delastic.apm.application_packages=$MICROAI_AM_JAVA_PACKAGES
+            -Delastic.apm.transaction_sample_rate=$MICROAI_TRANSACTION_SAMPLE_RATE"
+            
 else
     MICROAI_OPS=""
     echo "$(date -Is) MicroAI Agent not attached"
@@ -221,6 +224,7 @@ ENTRYPOINT ["/bin/bash", "-c", "/MicroAI_AM_agent/bin/main -debug -crypto=MICROA
 CORECLR_ENABLE_PROFILING=1
 ELASTIC_APM_ENVIRONMENT=TestEnvironment
 ELASTIC_APM_SERVER_URL=http://127.0.0.1:8200/06a81a4fb98d149f2d31c68828fa6e
+ELASTIC_APM_TRANSACTION_SAMPLE_RATE=1.0
 
 MICROAI_AM_ENABLE_AGENT=true
 MICROAI_AM_ENABLE_LAUNCHPAD_DATA=true
